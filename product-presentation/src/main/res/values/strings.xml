@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="retry">Retry</string>
+
+    <string name ="no_internet_connection">No Internet Connection</string>
+
+    <string name="no_result_found">No results found</string>
+
+    <string name="message">Message</string>
+
+    <string name="generic_error_message">Something went wrong</string>
+
+    <string name="product">Products</string>
+
+    <string name="product_detail">Product Details</string>
+    <string name="ship">Ship</string>
+    <string name="or">or</string>
+
+    <string name="credit_card_payment_title">Credit Card Payment</string>
+    <string name="credit_card_payment_subtitle">Note: you do NOT need to enter real data</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="credit_card_number_hint">Credit card number</string>
+
+
+</resources>
