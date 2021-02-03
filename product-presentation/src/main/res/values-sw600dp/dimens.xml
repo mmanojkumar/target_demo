@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="product_list_image_width">200dp</dimen>
+    <dimen name="product_list_image_height">240dp</dimen>
+
+    <dimen name="divider_height">2dp</dimen>
+
+    <dimen name="aisle_size">60dp</dimen>
+
+
+
+    <dimen name="product_title_text_size">40sp</dimen>
+    <dimen name="product_price_text_size">40sp</dimen>
+    <dimen name="product_ship_text_size">35sp</dimen>
+    <dimen name="product_or_text_size">25sp</dimen>
+    <dimen name="product_aisle_text_size">25sp</dimen>
+
+
+    <dimen name="add_to_list_text_size">25sp</dimen>
+    <dimen name="add_to_cart_text_size">25sp</dimen>
+
+
+    <dimen name="product_detail_image_width">500dp</dimen>
+    <dimen name="product_detail_image_height">700dp</dimen>
+
+    <dimen name="product_description_text_size">20sp</dimen>
+
+
+</resources>

@@ -7,6 +7,7 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.product.presentation.activity.ProductActivity
 
+
 class SplashActivity : AppCompatActivity() {
 
     private val SPLASH_TIME_OUT:Long = 3000 // 1 sec

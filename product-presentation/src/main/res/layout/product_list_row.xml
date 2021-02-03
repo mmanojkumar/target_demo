@@ -18,48 +18,46 @@
 
         <ImageView
             android:id="@+id/productImage"
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="@dimen/dp_120"
+            android:layout_width="@dimen/product_list_image_width"
+            android:layout_height="@dimen/product_list_image_height"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginRight="@dimen/dp_20"
             android:layout_marginEnd="@dimen/dp_20"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            />
 
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/productTitle"
-            style="@style/TextAppearance.AppCompat.Large"
+            android:textSize="@dimen/product_title_text_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_15"
             android:layout_toEndOf="@+id/productImage"
-            android:layout_toRightOf="@+id/productImage"
             android:text="@{productModel.title}"
-            android:textColor="@color/grey" />
+            android:textColor="@color/light_black" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/divider_height"
             android:layout_below="@+id/productTitle"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_toEndOf="@+id/productImage"
-            android:layout_toRightOf="@+id/productImage"
             android:background="@color/colorGrey"
             android:padding="@dimen/dp_10"/>
 
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/productPrice"
-            style="@style/TextAppearance.AppCompat.Large"
+            android:textSize="@dimen/product_price_text_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider"
             android:layout_toEndOf="@+id/productImage"
-            android:layout_toRightOf="@+id/productImage"
             android:text="@{productModel.price}"
-            android:textColor="@color/colorGrey"
-            android:layout_marginTop="@dimen/dp_6"/>
+            android:textColor="@color/light_black"
+            android:layout_marginTop="10dp"
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -67,40 +65,39 @@
             android:orientation="horizontal"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/divider"
-            android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
             >
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/ship"
-                style="@style/TextAppearance.AppCompat.Small"
+                android:textSize="@dimen/product_ship_text_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:text="@string/ship" />
+                android:text="@string/ship"
+                android:textColor="@color/medium_black"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/or"
-                style="@style/TextAppearance.AppCompat.Small"
+                android:textSize="@dimen/product_or_text_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 android:text="@string/or"
                 android:textColor="@color/light_grey" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/aisle"
-                style="@style/TextAppearance.AppCompat.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/aisle_size"
+                android:layout_height="@dimen/aisle_size"
+                android:textSize="@dimen/product_aisle_text_size"
                 android:layout_marginEnd="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16"
                 android:text="@{productModel.aisle}"
                 android:textColor="@android:color/holo_red_dark"
                 android:background="@drawable/grey_circle"
-                android:padding="@dimen/dp_6"/>
+                android:padding="@dimen/dp_6"
+                android:gravity="center"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 

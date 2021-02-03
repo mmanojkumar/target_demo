@@ -18,5 +18,12 @@
     <color name="grey">#7B7A7A</color>
     <color name="light_grey">#D8D7D7</color>
 
+    <color name="light_black">#6D6C6C</color>
+    <color name="medium_black">#403F3F</color>
+
+
+
+
+
 
 </resources>

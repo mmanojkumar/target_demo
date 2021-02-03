@@ -7,18 +7,36 @@
 
 
     <!--view dimension-->
-    <dimen name="divider_height">5dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
     <dimen name="lable_key_margin_right">10dp</dimen>
     <dimen name="lable_key_view_padding">5dp</dimen>
     <dimen name="product_image_width">100dp</dimen>
     <dimen name="product_image_height">120dp</dimen>
+
+    <dimen name="aisle_size">30dp</dimen>
+
+
+
     <dimen name="dp_20">20dp</dimen>
-    <dimen name="dp_100">100dp</dimen>
-    <dimen name="dp_120">120dp</dimen>
+    <dimen name="product_list_image_width">100dp</dimen>
+    <dimen name="product_list_image_height">120dp</dimen>
     <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_6">6dp</dimen>
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_10">10dp</dimen>
+
+    <dimen name="product_title_text_size">20sp</dimen>
+    <dimen name="product_price_text_size">20sp</dimen>
+    <dimen name="product_ship_text_size">15sp</dimen>
+    <dimen name="product_or_text_size">15sp</dimen>
+    <dimen name="product_aisle_text_size">15sp</dimen>
+
+
+    <dimen name="add_to_list_text_size">15sp</dimen>
+    <dimen name="add_to_cart_text_size">15sp</dimen>
+    <dimen name="product_detail_image_width">350dp</dimen>
+    <dimen name="product_detail_image_height">400dp</dimen>
+    <dimen name="product_description_text_size">15sp</dimen>
 
 
 </resources>

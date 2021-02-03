@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="product_detail_image_width">300dp</dimen>
+    <dimen name="product_detail_image_height">400dp</dimen>
+
+
+    <dimen name="product_title_text_size">30sp</dimen>
+    <dimen name="product_price_text_size">30sp</dimen>
+    <dimen name="product_ship_text_size">25sp</dimen>
+    <dimen name="product_or_text_size">20sp</dimen>
+    <dimen name="product_aisle_text_size">20sp</dimen>
+
+</resources>
