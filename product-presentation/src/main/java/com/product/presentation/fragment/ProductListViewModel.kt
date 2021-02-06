@@ -9,15 +9,16 @@ import com.product.presentation.mapper.ProductModelMapper
 import com.product.presentation.model.ProductModel
 import javax.inject.Inject
 
-class ProductListViewModel @Inject constructor(var productsUseCase:GetProductsUseCase) : ViewModel(){
+class ProductListViewModel @Inject constructor(var productsUseCase: GetProductsUseCase) :
+    ViewModel() {
 
-    val loading : MutableLiveData<Boolean> = MutableLiveData()
-    val failure : MutableLiveData<String> = MutableLiveData()
-    val success : MutableLiveData<List<ProductModel>> = MutableLiveData()
+    val loading: MutableLiveData<Boolean> = MutableLiveData()
+    val failure: MutableLiveData<Throwable> = MutableLiveData()
+    val success: MutableLiveData<List<ProductModel>> = MutableLiveData()
 
-    fun loadProducts(){
+    fun loadProducts() {
         loading.postValue(true)
-        productsUseCase.execute(null, object: DefaultObserver<List<Product>>() {
+        productsUseCase.execute(null, object : DefaultObserver<List<Product>>() {
             override fun onNext(productList: List<Product>?) {
                 success.postValue(ProductModelMapper.toProductModel(productList))
             }
@@ -28,10 +29,15 @@ class ProductListViewModel @Inject constructor(var productsUseCase:GetProductsUs
 
             override fun onError(exception: Throwable?) {
                 loading.postValue(false)
-                failure.postValue(exception?.message)
+                failure.postValue(exception)
             }
         })
     }
 
+
+    override fun onCleared() {
+        super.onCleared()
+        productsUseCase.dispose()
+    }
 
 }

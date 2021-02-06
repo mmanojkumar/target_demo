@@ -1,6 +1,6 @@
 package com.product.presentation.model
 
-data class ProductDetailModel(val id:Int){
+data class ProductDetailModel(val id: Int) {
 
     var title: String? = null
 

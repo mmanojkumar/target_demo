@@ -9,18 +9,21 @@ import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-abstract class BaseUseCase<T, Params>{
+abstract class BaseUseCase<T, Params> {
 
-    @Inject lateinit var threadExecutor:ThreadExecutor
-    @Inject lateinit var postExecutionThread:PostExecutionThread
+    @Inject
+    lateinit var threadExecutor: ThreadExecutor
+    @Inject
+    lateinit var postExecutionThread: PostExecutionThread
     private val disposables: CompositeDisposable = CompositeDisposable()
 
-    abstract fun buildUseCaseObservable(params: Params?): Observable<T>
+    abstract fun buildUseCaseObservable(params: Params?): Observable<T>?
 
-    fun execute(params:Params?, observer: DisposableObserver<T>){
-        val observable = buildUseCaseObservable(params).subscribeOn(Schedulers.from(threadExecutor))
-            .observeOn(postExecutionThread.scheduler)
-        disposables.add(observable.subscribeWith(observer))
+    fun execute(params: Params?, observer: DisposableObserver<T>) {
+        val observable = buildUseCaseObservable(params)
+            ?.subscribeOn(Schedulers.from(threadExecutor))
+            ?.observeOn(postExecutionThread.scheduler)
+        disposables.add(observable?.subscribeWith(observer))
     }
 
     open fun dispose() {
@@ -30,7 +33,7 @@ abstract class BaseUseCase<T, Params>{
     }
 
 
-    private  fun addDisposable(disposable: Disposable) {
+    private fun addDisposable(disposable: Disposable) {
         disposables.add(disposable)
     }
 

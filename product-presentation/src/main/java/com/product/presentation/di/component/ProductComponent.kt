@@ -17,8 +17,6 @@ import dagger.Component
         ProductViewModelModule::class]
 )
 interface ProductComponent : ActivityComponent {
+    fun inject(productDetailFragment: ProductDetailFragment)
     fun inject(productListFragment: ProductListFragment?)
-    fun inject(productListFragment: ProductDetailFragment?)
-
-    //fun inject(userDetailsFragment: ProductListFragment?)
 }

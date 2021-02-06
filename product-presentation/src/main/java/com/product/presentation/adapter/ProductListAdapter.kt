@@ -13,29 +13,30 @@ import com.product.presentation.databinding.ProductListRowBinding
 import com.product.presentation.model.ProductModel
 
 
-class ProductListAdapter(var productModels:List<ProductModel>) :
+class ProductListAdapter(var productModels: List<ProductModel>) :
     RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
 
-    var onItemClickListener:OnItemClickListener? = null
+    var onItemClickListener: OnItemClickListener? = null
 
     class ProductViewHolder(val productListRowBinding: ProductListRowBinding) :
-            RecyclerView.ViewHolder(productListRowBinding.root) {
+        RecyclerView.ViewHolder(productListRowBinding.root) {
 
-        fun loadProductImage(){
-            val circularProgressDrawable = CircularProgressDrawable(productListRowBinding.root.context)
+        fun loadProductImage() {
+            val circularProgressDrawable =
+                CircularProgressDrawable(productListRowBinding.root.context)
             circularProgressDrawable.strokeWidth = 10f
             circularProgressDrawable.setColorSchemeColors(Color.RED)
             circularProgressDrawable.centerRadius = 50f
             circularProgressDrawable.start()
 
-             Glide.with(productListRowBinding.root.context)
-                 .load(productListRowBinding.productModel!!.url)
-                 .placeholder(circularProgressDrawable)
-                 .error(R.drawable.error_load_image)
-                 .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
-                 .into(productListRowBinding.productImage)
+            Glide.with(productListRowBinding.root.context)
+                .load(productListRowBinding.productModel!!.url)
+                .placeholder(circularProgressDrawable)
+                .error(R.drawable.error_load_image)
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                .into(productListRowBinding.productImage)
 
-         }
+        }
 
     }
 
@@ -45,23 +46,23 @@ class ProductListAdapter(var productModels:List<ProductModel>) :
     }
 
     override fun getItemCount(): Int {
-       return productModels.size
+        return productModels.size
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.productListRowBinding.productModel = getItem(position)
         holder.loadProductImage()
-        holder.productListRowBinding.root.setOnClickListener{
+        holder.productListRowBinding.root.setOnClickListener {
             onItemClickListener?.onItemClick(position)
         }
     }
 
-    fun getItem(index:Int): ProductModel{
+    fun getItem(index: Int): ProductModel {
         return productModels[index]
     }
 
-    interface OnItemClickListener{
-        fun onItemClick(position:Int)
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 
 

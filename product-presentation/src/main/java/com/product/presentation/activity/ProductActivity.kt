@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.product.presentation.R
+import com.product.presentation.fragment.FragmentUtil
 import com.product.presentation.fragment.PaymentDialogFragment
 import com.product.presentation.fragment.ProductDetailFragment
 import com.product.presentation.fragment.ProductListFragment
@@ -14,10 +16,19 @@ class ProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.product_activity)
-        supportFragmentManager.beginTransaction().replace(R.id.product_list_container, ProductListFragment()).commit()
-        if(resources.getBoolean(R.bool.isTablet)){
-            supportFragmentManager.beginTransaction().replace(R.id.product_detail_container,
-                ProductDetailFragment(-1)).commit()
+
+        FragmentUtil.replaceFragment(
+            this,
+            R.id.product_list_container,
+            ProductListFragment(),
+            false
+        )
+
+        if (resources.getBoolean(R.bool.isTablet)) {
+            FragmentUtil.replaceFragment(
+                this, R.id.product_detail_container,
+                ProductDetailFragment(-1), false
+            )
         }
     }
 
@@ -44,6 +55,13 @@ class ProductActivity : AppCompatActivity() {
             }
             else -> false
         }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Glide.get(applicationContext).clearMemory()
+        Glide.get(applicationContext).clearDiskCache()
     }
 
 }

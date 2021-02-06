@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 
 
 import com.giphy.di.factory.ViewModelKey
-import com.product.presentation.di.factory.ProductViewModelFactory
+import com.product.presentation.di.factory.ViewModelFactory
 import com.product.presentation.fragment.ProductListViewModel
 
 import dagger.Binds
@@ -23,5 +23,5 @@ abstract class ProductViewModelModule {
 
 
     @Binds
-    abstract fun bindViewModelFactory(factory: ProductViewModelFactory): ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 }

@@ -7,12 +7,12 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 
-class GetProductDetailUseCase  @Inject constructor (var productRepository:ProductRepository) :
+class GetProductDetailUseCase @Inject constructor(var productRepository: ProductRepository) :
     BaseUseCase<ProductDetail, GetProductDetailUseCase.Params>() {
 
-    class Params  constructor(val productId: Int)
+    class Params constructor(val productId: Int)
 
-    override fun buildUseCaseObservable(params: Params?): Observable<ProductDetail> {
+    override fun buildUseCaseObservable(params: Params?): Observable<ProductDetail>? {
         return productRepository.getProduct(params!!.productId)
     }
 

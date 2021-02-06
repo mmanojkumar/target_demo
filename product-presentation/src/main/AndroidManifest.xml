@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.product.presentation">
 
-    <application
-        android:name=".AndroidApplication">
-        <activity android:name=".activity.ProductActivity"
+    <application android:name=".AndroidApplication">
+        <activity
+            android:name=".activity.ProductActivity"
             android:theme="@style/Theme.AppCompat.Light"
 
             />

@@ -13,7 +13,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class ApplicationModule (private var application: Application) {
+class ApplicationModule(private var application: Application) {
 
 
     @Provides
@@ -37,8 +37,9 @@ class ApplicationModule (private var application: Application) {
 
     @Provides
     @Singleton
-    fun provideProductRepository(productDataRepository: ProductDataRepository): ProductRepository{
+    fun provideProductRepository(productDataRepository: ProductDataRepository): ProductRepository {
         return productDataRepository
     }
+
 
 }

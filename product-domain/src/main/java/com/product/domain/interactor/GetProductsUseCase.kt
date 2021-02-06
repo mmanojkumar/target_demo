@@ -7,9 +7,10 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 
-class GetProductsUseCase  @Inject constructor (var productRepository:ProductRepository) : BaseUseCase<List<Product>, Void>() {
+class GetProductsUseCase @Inject constructor(var productRepository: ProductRepository) :
+    BaseUseCase<List<Product>, Void>() {
 
-    override fun buildUseCaseObservable(params: Void?): Observable<List<Product>> {
+    override fun buildUseCaseObservable(params: Void?): Observable<List<Product>>? {
         return productRepository.getProducts()
     }
 

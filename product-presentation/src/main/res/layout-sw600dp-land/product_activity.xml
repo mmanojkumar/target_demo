@@ -3,15 +3,13 @@
     android:id="@+id/productContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    >
+    android:orientation="horizontal">
 
     <FrameLayout
         android:id="@+id/product_list_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 
     <FrameLayout
         android:id="@+id/product_detail_container"

@@ -6,12 +6,13 @@ import com.tutorial.github.commits.latest.data.network.interceptor.NoInternetExc
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
+import javax.inject.Inject
 
 
-class InternetConnectionInterceptor(private val context: Context) : Interceptor{
+class InternetConnectionInterceptor @Inject constructor(val context: Context) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        if(isConnected()){
+        if (isConnected()) {
             val builder: Request.Builder = chain.request().newBuilder()
             return chain.proceed(builder.build())
         }
@@ -23,7 +24,17 @@ class InternetConnectionInterceptor(private val context: Context) : Interceptor{
     private fun isConnected(): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val netInfo = connectivityManager.activeNetworkInfo
-        return netInfo != null && netInfo.isConnected
+        var hasWifi = false
+        var hasMobileData = false
+        val networkInfos = connectivityManager.allNetworkInfo
+        for (info in networkInfos) {
+            if (info.typeName
+                    .equals("WIFI", ignoreCase = true)
+            ) if (info.isConnected) hasWifi = true
+            if (info.typeName
+                    .equals("MOBILE DATA", ignoreCase = true)
+            ) if (info.isConnected) hasMobileData = true
+        }
+        return hasMobileData || hasWifi
     }
 }

@@ -11,8 +11,8 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [NetworkModule::class, ApplicationModule::class])
-interface NetworkComponent{
+interface NetworkComponent {
     fun retrofit(): Retrofit
     fun restClient(): RestClient
-    fun context() : Context
+    fun context(): Context
 }

@@ -15,10 +15,10 @@ import javax.inject.Singleton
 
 
 @Module
-class NetworkModule{
+class NetworkModule {
 
     @Provides
-    fun retrofit(okHttpClient: OkHttpClient, url:String): Retrofit {
+    fun retrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create())
@@ -39,10 +39,10 @@ class NetworkModule{
     fun okHttpClient(context: Context): OkHttpClient {
         val builder = OkHttpClient.Builder()
 
-        if(BuildConfig.DEBUG){
-           builder.addInterceptor(HttpLoggingInterceptor().also {
-                    it.level = HttpLoggingInterceptor.Level.BODY
-                })
+        if (BuildConfig.DEBUG) {
+            builder.addInterceptor(HttpLoggingInterceptor().also {
+                it.level = HttpLoggingInterceptor.Level.BODY
+            })
         }
         builder.addInterceptor(InternetConnectionInterceptor(context))
         return builder.build()

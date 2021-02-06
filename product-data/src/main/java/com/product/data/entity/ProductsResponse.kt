@@ -2,7 +2,7 @@ package com.product.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class ProductEntity(val id:Int) {
+data class ProductEntity(val id: Int) {
 
     var title: String? = null
 

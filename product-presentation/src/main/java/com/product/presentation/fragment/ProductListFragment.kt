@@ -16,28 +16,25 @@ import com.product.presentation.databinding.ProductListFragmentBinding
 import com.product.presentation.di.component.DaggerProductComponent
 import com.product.presentation.di.module.ActivityModule
 import com.product.presentation.model.ProductModel
+import com.tutorial.github.commits.latest.data.network.interceptor.NoInternetException
 import javax.inject.Inject
 
 
-class ProductListFragment : ProductBaseFragment(){
+class ProductListFragment : BaseFragment() {
 
     @Inject
-    lateinit var productListViewModel:ProductListViewModel
+    lateinit var productListViewModel: ProductListViewModel
 
-    private lateinit var productListFragmentBinding:ProductListFragmentBinding
+    private lateinit var productListFragmentBinding: ProductListFragmentBinding
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        productListViewModel.loadProducts()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        productListFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.product_list_fragment,
+        productListFragmentBinding = DataBindingUtil.inflate(
+            inflater, R.layout.product_list_fragment,
             container, false
         )
         productListFragmentBinding.productListViewModel = productListViewModel
@@ -46,16 +43,22 @@ class ProductListFragment : ProductBaseFragment(){
     }
 
 
-    override fun injectDaggerDependencies() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        productListViewModel.loadProducts()
+    }
+
+    override fun initDaggerDependencies() {
         activity?.let {
-            DaggerProductComponent.builder().
-            applicationComponent((activity?.application as AndroidApplication).
-            applicationComponent).activityModule(ActivityModule(it as AppCompatActivity)).build().
-            inject(this)
+            DaggerProductComponent.builder().applicationComponent(
+                (activity?.application as AndroidApplication).applicationComponent
+            ).activityModule(ActivityModule(it as AppCompatActivity)).build().inject(this)
         }
     }
 
+
     override fun initUIComponents() {
+
         productListFragmentBinding.productRecyclerView.layoutManager =
             LinearLayoutManager(context)
         val dividerItemDecoration = DividerItemDecoration(
@@ -75,47 +78,71 @@ class ProductListFragment : ProductBaseFragment(){
     }
 
     private fun loadProductDetail(
-        position: Int) {
-        val detailContainerId =   if(resources.getBoolean(R.bool.isTablet)) R.id.product_detail_container else R.id.product_list_container
-        val productListAdapter:ProductListAdapter =  productListFragmentBinding.productRecyclerView.adapter as ProductListAdapter
-        var fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()?.replace(
-            detailContainerId,
-            ProductDetailFragment(productListAdapter.getItem(position).id),
-            "Detail"
-        )
-        if(resources.getBoolean(R.bool.isTablet)){
-            fragmentTransaction?.commit()
-        }else{
-            fragmentTransaction?.addToBackStack(null)?.commit()
+        position: Int
+    ) {
+
+        val productListAdapter: ProductListAdapter =
+            productListFragmentBinding.productRecyclerView.adapter
+                    as ProductListAdapter
+
+        when (isTablet()) {
+            true -> {
+                replaceFragment(
+                    R.id.product_detail_container,
+                    ProductDetailFragment(productListAdapter.getItem(position).id),
+                    false
+                )
+            }
+            else -> {
+                replaceFragment(
+                    R.id.product_list_container,
+                    ProductDetailFragment(productListAdapter.getItem(position).id)
+                )
+            }
         }
     }
 
     override fun initObservers() {
         productListViewModel.success.observe(this, Observer {
-            if(it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 showProducts(it)
-                if(resources.getBoolean(R.bool.isTablet)) {
+                if (resources.getBoolean(R.bool.isTablet)) {
                     loadProductDetail(0)
                 }
-            }else{
+            } else {
                 hideProducts()
                 showErrorMessage(getString(R.string.no_result_found))
             }
         })
 
         productListViewModel.failure.observe(this, Observer {
-            showErrorMessage(it)
+            when {
+                it is NoInternetException -> {
+                    showErrorMessage(getString(R.string.no_internet_connection))
+                }
+                it.message != null -> {
+                    showErrorMessage(getString(R.string.no_internet_connection))
+                }
+                else -> {
+                    showErrorMessage(getString(R.string.generic_error_message))
+                }
+
+            }
         })
 
         productListViewModel.loading.observe(this, Observer {
-            if(it){
+            if (it) {
                 hideErrorMessage()
                 hideProducts()
                 showShimmer()
-            }else{
+            } else {
                 hideShimmer()
             }
         })
+    }
+
+    override fun getTitle(): String {
+        return getString(R.string.product)
     }
 
     private fun hideShimmer() {
@@ -128,7 +155,7 @@ class ProductListFragment : ProductBaseFragment(){
         productListFragmentBinding.includeShimmer.shimmer.startShimmer()
     }
 
-    private fun showErrorMessage(errorMessage:String) {
+    private fun showErrorMessage(errorMessage: String) {
         productListFragmentBinding.errorMessage.text = errorMessage
         productListFragmentBinding.errorMessage.visibility = View.VISIBLE
         productListFragmentBinding.retry.visibility = View.VISIBLE
@@ -145,15 +172,12 @@ class ProductListFragment : ProductBaseFragment(){
 
 
     private fun showProducts(it: List<ProductModel>) {
-        val productListAdapter:ProductListAdapter =  productListFragmentBinding.productRecyclerView.adapter as ProductListAdapter
+        val productListAdapter: ProductListAdapter =
+            productListFragmentBinding.productRecyclerView.adapter as ProductListAdapter
         productListAdapter.productModels = it
         productListAdapter.notifyDataSetChanged()
         productListFragmentBinding.productRecyclerView.visibility = View.VISIBLE
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        activity?.title = getString(R.string.product)
-    }
 }

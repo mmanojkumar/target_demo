@@ -5,6 +5,6 @@ import com.product.domain.model.ProductDetail
 import io.reactivex.Observable
 
 interface ProductRepository {
-    fun getProducts(): Observable<List<Product>>
-    fun getProduct(productId: Int): Observable<ProductDetail>
+    fun getProducts(): Observable<List<Product>>?
+    fun getProduct(productId: Int): Observable<ProductDetail>?
 }

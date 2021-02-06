@@ -10,30 +10,35 @@ import com.product.presentation.model.ProductDetailModel
 
 import javax.inject.Inject
 
-class ProductDetailViewModel @Inject constructor(var productDetailUseCase:GetProductDetailUseCase) : ViewModel(){
+class ProductDetailViewModel @Inject constructor(var productDetailUseCase: GetProductDetailUseCase) :
+    ViewModel() {
 
-    val loading : MutableLiveData<Boolean> = MutableLiveData()
-    val failure : MutableLiveData<String> = MutableLiveData()
-    val success : MutableLiveData<ProductDetailModel> = MutableLiveData()
+    val loading: MutableLiveData<Boolean> = MutableLiveData()
+    val failure: MutableLiveData<Throwable> = MutableLiveData()
+    val success: MutableLiveData<ProductDetailModel> = MutableLiveData()
 
-    fun loadProductDetail(productId:Int){
+    fun loadProductDetail(productId: Int) {
         loading.postValue(true)
         productDetailUseCase.execute(GetProductDetailUseCase.Params(productId),
-            object: DefaultObserver<ProductDetail>() {
-            override fun onNext(productDetail: ProductDetail) {
-                success.postValue(ProductModelMapper.toProductDetailModel(productDetail))
-            }
+            object : DefaultObserver<ProductDetail>() {
+                override fun onNext(productDetail: ProductDetail) {
+                    success.postValue(ProductModelMapper.toProductDetailModel(productDetail))
+                }
 
-            override fun onComplete() {
-                loading.postValue(false)
-            }
+                override fun onComplete() {
+                    loading.postValue(false)
+                }
 
-            override fun onError(exception: Throwable?) {
-                loading.postValue(false)
-                failure.postValue(exception?.message)
-            }
-        })
+                override fun onError(exception: Throwable?) {
+                    loading.postValue(false)
+                    failure.postValue(exception)
+                }
+            })
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        productDetailUseCase.dispose()
+    }
 
 }

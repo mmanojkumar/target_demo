@@ -7,11 +7,11 @@ import com.product.presentation.model.ProductModel
 
 object ProductModelMapper {
 
-    fun toProductModel(products: List<Product>?) : List<ProductModel>{
+    fun toProductModel(products: List<Product>?): List<ProductModel> {
         val productModels = mutableListOf<ProductModel>()
         products?.forEach {
             productModels.add(ProductModel(it.id).apply {
-                title  = it.title
+                title = it.title
                 aisle = it.aisle
                 url = it.url
                 price = it.price

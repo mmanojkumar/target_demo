@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-        <!--    font size-->
+    <!--    font size-->
     <dimen name="lable_key_size">20sp</dimen>
     <dimen name="lable_value_size">15sp</dimen>
 
@@ -14,7 +14,6 @@
     <dimen name="product_image_height">120dp</dimen>
 
     <dimen name="aisle_size">30dp</dimen>
-
 
 
     <dimen name="dp_20">20dp</dimen>
