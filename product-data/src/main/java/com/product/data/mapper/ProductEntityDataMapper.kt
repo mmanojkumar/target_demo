@@ -25,9 +25,14 @@ object ProductEntityDataMapper {
         return ProductDetail(productEntity.id).apply {
             salesPrice = productEntity.salePriceEntity?.displayString
             regularprice = productEntity.regularPriceEntity?.displayString
-            description = productEntity.description
+            description = if(productEntity.description!!.length > 50000){
+                productEntity.description!!.substring(0, 50000)
+            }else {
+                productEntity.description
+            }
             url = productEntity.imageUrl
             title = productEntity.title
         }
     }
+
 }

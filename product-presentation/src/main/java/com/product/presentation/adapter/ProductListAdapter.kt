@@ -29,6 +29,7 @@ class ProductListAdapter(var productModels: List<ProductModel>) :
             circularProgressDrawable.centerRadius = 50f
             circularProgressDrawable.start()
 
+
             Glide.with(productListRowBinding.root.context)
                 .load(productListRowBinding.productModel!!.url)
                 .placeholder(circularProgressDrawable)

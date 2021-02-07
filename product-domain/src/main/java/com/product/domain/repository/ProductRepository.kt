@@ -6,5 +6,7 @@ import io.reactivex.Observable
 
 interface ProductRepository {
     fun getProducts(): Observable<List<Product>>?
+
+    @Throws(Exception::class)
     fun getProduct(productId: Int): Observable<ProductDetail>?
 }

@@ -34,12 +34,10 @@ class ApplicationModule(private var application: Application) {
         return uiThread
     }
 
-
     @Provides
     @Singleton
     fun provideProductRepository(productDataRepository: ProductDataRepository): ProductRepository {
         return productDataRepository
     }
-
 
 }

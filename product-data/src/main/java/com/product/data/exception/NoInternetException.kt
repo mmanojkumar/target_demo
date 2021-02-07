@@ -1,4 +1,4 @@
-package com.tutorial.github.commits.latest.data.network.interceptor
+package com.product.data.exception
 
 import java.io.IOException
 

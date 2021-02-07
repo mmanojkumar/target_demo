@@ -57,11 +57,4 @@ class ProductActivity : AppCompatActivity() {
         }
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Glide.get(applicationContext).clearMemory()
-        Glide.get(applicationContext).clearDiskCache()
-    }
-
 }

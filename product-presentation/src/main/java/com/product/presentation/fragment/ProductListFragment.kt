@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.product.data.exception.ApiException
+import com.product.data.exception.NoInternetException
 import com.product.presentation.AndroidApplication
 import com.product.presentation.R
 import com.product.presentation.adapter.ProductListAdapter
@@ -16,7 +18,6 @@ import com.product.presentation.databinding.ProductListFragmentBinding
 import com.product.presentation.di.component.DaggerProductComponent
 import com.product.presentation.di.module.ActivityModule
 import com.product.presentation.model.ProductModel
-import com.tutorial.github.commits.latest.data.network.interceptor.NoInternetException
 import javax.inject.Inject
 
 
@@ -77,9 +78,7 @@ class ProductListFragment : BaseFragment() {
 
     }
 
-    private fun loadProductDetail(
-        position: Int
-    ) {
+    private fun loadProductDetail(position: Int) {
 
         val productListAdapter: ProductListAdapter =
             productListFragmentBinding.productRecyclerView.adapter
@@ -116,17 +115,16 @@ class ProductListFragment : BaseFragment() {
         })
 
         productListViewModel.failure.observe(this, Observer {
-            when {
-                it is NoInternetException -> {
+            when (it) {
+                is NoInternetException -> {
                     showErrorMessage(getString(R.string.no_internet_connection))
                 }
-                it.message != null -> {
-                    showErrorMessage(getString(R.string.no_internet_connection))
+                is ApiException -> {
+                    showErrorMessage(it.message)
                 }
                 else -> {
                     showErrorMessage(getString(R.string.generic_error_message))
                 }
-
             }
         })
 

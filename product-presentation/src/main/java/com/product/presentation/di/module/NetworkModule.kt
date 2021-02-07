@@ -4,6 +4,7 @@ import android.content.Context
 import com.bumptech.glide.BuildConfig
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.product.data.network.RestClient
+import com.product.data.network.interceptor.FailureResponseInterceptor
 import com.product.data.network.interceptor.InternetConnectionInterceptor
 import dagger.Module
 import dagger.Provides
@@ -45,6 +46,8 @@ class NetworkModule {
             })
         }
         builder.addInterceptor(InternetConnectionInterceptor(context))
+        builder.addInterceptor(FailureResponseInterceptor())
+
         return builder.build()
     }
 

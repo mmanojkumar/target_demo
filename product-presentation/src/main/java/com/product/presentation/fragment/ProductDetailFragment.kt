@@ -3,6 +3,8 @@ package com.product.presentation.fragment
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +15,14 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.product.data.exception.ApiException
+import com.product.data.exception.NoInternetException
 import com.product.presentation.AndroidApplication
 import com.product.presentation.R
 import com.product.presentation.databinding.ProductDetailFragmentBinding
 import com.product.presentation.di.component.DaggerProductComponent
 import com.product.presentation.di.module.ActivityModule
-import com.tutorial.github.commits.latest.data.network.interceptor.NoInternetException
+import java.lang.Exception
 import javax.inject.Inject
 
 
@@ -68,6 +72,7 @@ class ProductDetailFragment() : BaseFragment() {
                 productDetailFragmentBinding.errorContainer.visibility = View.GONE
                 productDetailFragmentBinding.productDetailContainer.visibility = View.VISIBLE
                 productDetailFragmentBinding.productDetailModel = it
+
                 loadProductImage()
                 productDetailFragmentBinding.regularPrice.paintFlags =
                     productDetailFragmentBinding.regularPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -81,17 +86,16 @@ class ProductDetailFragment() : BaseFragment() {
         })
 
         productDetailViewModel.failure.observe(this, Observer {
-            when {
-                it is NoInternetException -> {
+            when (it) {
+                is NoInternetException -> {
                     showErrorMessage(getString(R.string.no_internet_connection))
                 }
-                it.message != null -> {
-                    showErrorMessage(getString(R.string.no_internet_connection))
+                is ApiException -> {
+                    showErrorMessage(it.message)
                 }
                 else -> {
                     showErrorMessage(getString(R.string.generic_error_message))
                 }
-
             }
         })
 
