@@ -2,13 +2,12 @@ package com.product.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class ProductEntity(val id: Int) {
-
-    var title: String? = null
-
-    var aisle: String? = null
-
-    var description: String? = null
+data class ProductEntity(
+    val id: Int,
+    val title: String,
+    val description: String,
+    val aisle: String
+) {
 
     @SerializedName("image_url")
     var imageUrl: String? = null

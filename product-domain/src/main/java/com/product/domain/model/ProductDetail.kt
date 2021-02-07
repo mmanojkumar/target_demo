@@ -1,15 +1,11 @@
 package com.product.domain.model
 
-data class ProductDetail(val id: Int) {
+data class ProductDetail(
+    val id: Int,
+    val title: String,
+    val description: String,
+    var salesPrice: String?,
+    var regularprice: String?,
+    var imageUrl: String?)
 
-    var title: String? = null
-
-    var salesPrice: String? = null
-
-    var regularprice: String? = null
-
-    var url: String? = null
-
-    var description: String? = null
-}
 

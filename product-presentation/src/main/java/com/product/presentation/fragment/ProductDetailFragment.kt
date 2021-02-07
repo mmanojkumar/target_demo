@@ -141,7 +141,7 @@ class ProductDetailFragment() : BaseFragment() {
         circularProgressDrawable.start()
 
         Glide.with(productDetailFragmentBinding.root.context)
-            .load(productDetailFragmentBinding.productDetailModel!!.url)
+            .load(productDetailFragmentBinding.productDetailModel!!.imageUrl)
             .placeholder(circularProgressDrawable)
             .error(R.drawable.error_load_image)
             .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))

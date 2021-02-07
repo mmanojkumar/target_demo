@@ -10,12 +10,7 @@ object ProductModelMapper {
     fun toProductModel(products: List<Product>?): List<ProductModel> {
         val productModels = mutableListOf<ProductModel>()
         products?.forEach {
-            productModels.add(ProductModel(it.id).apply {
-                title = it.title
-                aisle = it.aisle
-                url = it.url
-                price = it.price
-            })
+            productModels.add(ProductModel(it.id, it.title, it.aisle, it.price, it.imageUrl))
         }
 
         return productModels
@@ -23,12 +18,12 @@ object ProductModelMapper {
 
 
     fun toProductDetailModel(productDetail: ProductDetail): ProductDetailModel {
-        return ProductDetailModel(productDetail.id).apply {
-            salesPrice = productDetail.salesPrice
-            regularprice = productDetail.regularprice
-            description = productDetail.description
-            url = productDetail.url
-            title = productDetail.title
-        }
+        return ProductDetailModel(
+            productDetail.id,
+            productDetail.title, productDetail.description,
+            productDetail.salesPrice,
+            productDetail.regularprice,
+            productDetail.imageUrl
+        )
     }
 }

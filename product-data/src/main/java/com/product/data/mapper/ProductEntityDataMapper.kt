@@ -10,29 +10,33 @@ object ProductEntityDataMapper {
     fun toProduct(productsResponse: ProductsResponse): List<Product> {
         val products = mutableListOf<Product>()
         productsResponse.productEntities?.forEach {
-            products.add(Product(it.id).apply {
-                title = it.title
-                aisle = it.aisle
-                url = it.imageUrl
-                price = it.salePriceEntity?.displayString
-            })
+            products.add(
+                Product(
+                    it.id,
+                    it.title,
+                    it.aisle,
+                    it.salePriceEntity?.displayString,
+                    it.imageUrl
+                )
+            )
         }
         return products
     }
 
 
     fun toProductDetail(productEntity: ProductEntity): ProductDetail {
-        return ProductDetail(productEntity.id).apply {
-            salesPrice = productEntity.salePriceEntity?.displayString
-            regularprice = productEntity.regularPriceEntity?.displayString
-            description = if(productEntity.description!!.length > 50000){
-                productEntity.description!!.substring(0, 50000)
-            }else {
+        return ProductDetail(
+            productEntity.id,
+            productEntity.title,
+            if (productEntity.description.length > 50000) {
+                productEntity.description.substring(0, 50000)
+            } else {
                 productEntity.description
-            }
-            url = productEntity.imageUrl
-            title = productEntity.title
-        }
+            },
+            productEntity.salePriceEntity?.displayString,
+            productEntity.regularPriceEntity?.displayString,
+            productEntity.imageUrl
+        )
     }
 
 }

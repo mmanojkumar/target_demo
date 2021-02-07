@@ -31,7 +31,7 @@ class ProductListAdapter(var productModels: List<ProductModel>) :
 
 
             Glide.with(productListRowBinding.root.context)
-                .load(productListRowBinding.productModel!!.url)
+                .load(productListRowBinding.productModel!!.imageUrl)
                 .placeholder(circularProgressDrawable)
                 .error(R.drawable.error_load_image)
                 .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
