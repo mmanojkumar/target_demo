@@ -2,7 +2,7 @@ package com.product.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class SalePriceEntity(@SerializedName("amount_in_cents") val amountInCents: Double) {
+data class SalePriceEntity(@SerializedName("amount_in_cents") var amountInCents: Double?) {
 
     @SerializedName("currency_symbol")
     var currencySymbol: String? = null
