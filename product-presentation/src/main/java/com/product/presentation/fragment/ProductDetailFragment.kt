@@ -3,8 +3,6 @@ package com.product.presentation.fragment
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +20,6 @@ import com.product.presentation.R
 import com.product.presentation.databinding.ProductDetailFragmentBinding
 import com.product.presentation.di.component.DaggerProductComponent
 import com.product.presentation.di.module.ActivityModule
-import java.lang.Exception
 import javax.inject.Inject
 
 
