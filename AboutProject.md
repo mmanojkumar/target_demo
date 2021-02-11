@@ -22,6 +22,6 @@ MVVM with Clean Architecture
 2.Espresso test case for product listing and product detail page  
 3.Espresso test case for card validation
 
-**Negative Scenarios**
-Internet not available
-APi failure
+**Negative Scenarios**  
+1.Internet not available  
+2.API failure
