@@ -23,3 +23,5 @@ MVVM with Clean Architecture
 3.Espresso test case for card validation
 
 **Negative Scenarios**
+Internet not available
+APi failure

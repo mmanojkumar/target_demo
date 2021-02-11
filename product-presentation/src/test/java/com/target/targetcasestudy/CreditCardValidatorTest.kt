@@ -14,36 +14,38 @@ import org.junit.Test
 class CreditCardValidatorTest {
 
     @Test
-    fun `is credit card number valid`() {
+    fun `is valid credit card`() {
+        val cardNumber = "4539976741512043"
         Assert.assertTrue(
-            "valid credit card number should yield true",
-            validateCreditCard("4539976741512043")
+            "Card number is valid # $cardNumber",
+            validateCreditCard(cardNumber)
         )
     }
 
 
     @Test
-    fun `is credit card number not valid`() {
+    fun `is invalid credit card`() {
+        val cardNumber = "12312123123123123"
         Assert.assertFalse(
-            "valid credit card number should yield true",
-            validateCreditCard("12312123123123123")
+            "Card number is valid # $cardNumber",
+            validateCreditCard(cardNumber)
         )
     }
 
 
     @Test
-    fun `is valid visa card provider`() {
+    fun `is valid card number prefix matched`() {
         Assert.assertTrue(
-            "is valid visa card provider should return true",
+            "is valid prefix matched true",
             isValidCardProvider("4") && isValidCardProvider("5") &&
                     isValidCardProvider("37") && isValidCardProvider("6")
         )
     }
 
     @Test
-    fun `is not valid visa card provider`() {
+    fun `is  invalid card number prefix matched`() {
         Assert.assertFalse(
-            "is valid visa card provider should return false",
+            "is in valid prefix matched false",
             isValidCardProvider("8")
         )
     }
@@ -57,9 +59,9 @@ class CreditCardValidatorTest {
     }
 
     @Test
-    fun `is not valid card length`() {
+    fun `is invalid card length`() {
         Assert.assertFalse(
-            "is valid card length should return false",
+            "is invalid card length should return false",
             isValidLength("823234")
         )
     }
@@ -73,9 +75,9 @@ class CreditCardValidatorTest {
     }
 
     @Test
-    fun `is not valid luhn check`() {
+    fun `is invalid luhn check`() {
         Assert.assertFalse(
-            "is valid luhn check return true",
+            "is invalid luhn check return true",
             isLuhnCheck("123123123123")
         )
     }

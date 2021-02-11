@@ -1,25 +1,32 @@
 package com.product.presentation.validator
 
 /**
- * For an explanation of how to validate credit card numbers read:
  *
- * https://www.freeformatter.com/credit-card-number-generator-validator.html#fakeNumbers
- *
- * This contains a breakdown of how this algorithm should work as
- * well as a way to generate fake credit card numbers for testing
- *
- * The structure and signature of this is open to modification, however
- * it *must* include a method, field, etc that returns a [Boolean]
- * indicating if the input is valid or not
- *
- * Additional notes:
- *  * This method does not need to validate the credit card issuer
- *  * This method must validate card number length (13 - 19 digits), but does not
- *    need to validate the length based on the issuer.
- *
- * @param creditCardNumber - credit card number of (13, 19) digits
- * @return true if a credit card number is believed to be valid,
- * otherwise false
+    Reference  https://www.geeksforgeeks.org/program-credit-card-number-validation/
+    Credit card numbers follow certain patterns.
+    A credit card number must have between 13 and 16 digits. It must start with:
+
+    4 for Visa cards
+    5 for Master cards
+    37 for American Express cards
+    6 for Discover cards
+    The problem can be solved by using Luhn algorithm.
+    Luhn check or the Mod 10 check, which can be described as follows (for illustration,
+    consider the card number 4388576018402626):
+
+    Step 1. Double every second digit from right to left. If doubling of a digit results in a
+    two-digit number, add up the two digits to get a single-digit number (like for 12:1+2, 18=1+8).
+
+    Step 2. Now add all single-digit numbers from Step 1.
+    4 + 4 + 8 + 2 + 3 + 1 + 7 + 8 = 37
+
+    Step 3. Add all digits in the odd places from right to left in the card number.
+    6 + 6 + 0 + 8 + 0 + 7 + 8 + 3 = 38
+
+    Step 4. Sum the results from Step 2 and Step 3.
+    37 + 38 = 75
+
+    Step 5. If the result from Step 4 is divisible by 10, the card number is valid; otherwise, it is invalid.
  */
 fun validateCreditCard(creditCardNumber: String): Boolean {
     return isValidLength(creditCardNumber) &&
@@ -27,14 +34,6 @@ fun validateCreditCard(creditCardNumber: String): Boolean {
             isLuhnCheck(creditCardNumber)
 }
 
-/**
- * Credit card numbers follow certain patterns.
-A credit card number must have between 13 and 16 digits. It must start with:
-4 for Visa cards
-5 for Master cards
-37 for American Express cards
-6 for Discover cards
- */
 
 fun isValidCardProvider(creditCardNumber: String): Boolean {
     return creditCardNumber.startsWith("4") ||

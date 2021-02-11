@@ -14,7 +14,9 @@ import com.product.presentation.activity.ProductActivity
 
 class SplashActivity : AppCompatActivity() {
 
-    private val SPLASH_TIME_OUT: Long = 3000 // 1 sec
+    companion object{
+        private const val SPLASH_TIME_OUT: Long = 3500
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

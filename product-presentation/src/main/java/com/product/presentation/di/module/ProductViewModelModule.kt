@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 
-import com.giphy.di.factory.ViewModelKey
 import com.product.presentation.di.factory.ViewModelFactory
+import com.product.presentation.di.factory.ViewModelKey
 import com.product.presentation.fragment.ProductListViewModel
 
 import dagger.Binds

@@ -1,4 +1,4 @@
-package com.giphy.di.factory
+package com.product.presentation.di.factory
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey
