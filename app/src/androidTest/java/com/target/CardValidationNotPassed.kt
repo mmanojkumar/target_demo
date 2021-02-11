@@ -11,6 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import com.product.presentation.activity.ProductActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
@@ -26,7 +27,7 @@ class CardValidationNotPassed {
 
     @Rule
     @JvmField
-    var mActivityTestRule = ActivityTestRule(SplashActivity::class.java)
+    var mActivityTestRule = ActivityTestRule(ProductActivity::class.java)
 
     @Test
     fun cardValidationPassed() {
